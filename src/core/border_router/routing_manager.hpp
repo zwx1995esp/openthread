@@ -685,13 +685,17 @@ private:
     //------------------------------------------------------------------------------------------------------------------
     // Typedefs
 
-    using Option                 = Ip6::Nd::Option;
-    using PrefixInfoOption       = Ip6::Nd::PrefixInfoOption;
-    using RouteInfoOption        = Ip6::Nd::RouteInfoOption;
-    using RouterAdvert           = Ip6::Nd::RouterAdvert;
-    using NeighborAdvertMessage  = Ip6::Nd::NeighborAdvertMessage;
-    using NeighborSolicitMessage = Ip6::Nd::NeighborSolicitMessage;
-    using RouterSolicitMessage   = Ip6::Nd::RouterSolicitMessage;
+
+    using Option                = Ip6::Nd::Option;
+    using PrefixInfoOption      = Ip6::Nd::PrefixInfoOption;
+    using RouteInfoOption       = Ip6::Nd::RouteInfoOption;
+    using RaFlagsExtOption      = Ip6::Nd::RaFlagsExtOption;
+    using RouterAdvert          = Ip6::Nd::RouterAdvert;
+    using NeighborAdvertMessage = Ip6::Nd::NeighborAdvertMessage;
+    using TxMessage             = Ip6::Nd::TxMessage;
+    using NeighborSolicitHeader = Ip6::Nd::NeighborSolicitHeader;
+    using RouterSolicitHeader   = Ip6::Nd::RouterSolicitHeader;
+    using LinkLayerAddress      = InfraIf::LinkLayerAddress;
 
     //------------------------------------------------------------------------------------------------------------------
     // Enumerations

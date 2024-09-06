@@ -332,12 +332,12 @@ otError otPlatInfraIfSendIcmp6Nd(uint32_t            aInfraIfIndex,
 
     case Ip6::Icmp::Header::kTypeNeighborSolicit:
     {
-        const Ip6::Nd::NeighborSolicitMessage *nsMsg =
-            reinterpret_cast<const Ip6::Nd::NeighborSolicitMessage *>(packet.GetBytes());
+        const Ip6::Nd::NeighborSolicitHeader *nsMsg =
+            reinterpret_cast<const Ip6::Nd::NeighborSolicitHeader *>(packet.GetBytes());
 
         Log("  Neighbor Solicit message");
 
-        VerifyOrQuit(packet.GetLength() >= sizeof(Ip6::Nd::NeighborSolicitMessage));
+        VerifyOrQuit(packet.GetLength() >= sizeof(Ip6::Nd::NeighborSolicitHeader));
         VerifyOrQuit(nsMsg->IsValid());
         sNsEmitted = true;
 
