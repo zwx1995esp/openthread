@@ -207,6 +207,7 @@ public:
         mSendQueue.GetInfo(aSendQueueInfo), mReassemblyList.GetInfo(aReassemblyQueueInfo);
     }
 
+    void DumpMeshForwardTxQueue(void);
     /**
      * Returns a reference to the IP level counters.
      *

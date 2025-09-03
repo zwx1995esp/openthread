@@ -415,7 +415,7 @@ void otHistoryTrackerEntryAgeToString(uint32_t aEntryAge, char *aBuffer, uint16_
 /**
  * @}
  */
-
+void otDumpMeshForwardTxQueue(otInstance *aInstance);
 #ifdef __cplusplus
 } // extern "C"
 #endif

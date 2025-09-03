@@ -187,7 +187,7 @@ public:
      */
     void SetNextBuffer(Buffer *aNext) { SetNext(aNext); }
 
-protected:
+// protected:
     struct Metadata
     {
         bool mDirectTx : 1;            // Whether a direct transmission is required.

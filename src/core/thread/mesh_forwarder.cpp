@@ -493,6 +493,62 @@ exit:
     return;
 }
 
+void MeshForwarder::DumpMeshForwardTxQueue(void)
+{
+    static const char *const TypeToString[] = {
+        "Ip6",
+        "6lowpan",
+        "Supervision",
+        "MacEmptyData",
+        "Ip4",
+        "Ble",
+        "Other",
+    };
+
+    static const char *const SubTypeToString[] = {
+        "SubTypeNone",
+        "SubTypeMle",
+        "SubTypeMplRetransmission",
+        "SubTypeJoinerFinalizeResponse",
+    };
+
+
+    Message *curMessage, *nextMessage;
+    int16_t index = 0;
+    if (mSendQueue.GetHead() == nullptr) {
+        LogCrit("Mesh Forward Tx Queue is empty");
+    }
+    for (curMessage = mSendQueue.GetHead(); curMessage; curMessage = nextMessage)
+    {
+        Message::Metadata &meta = curMessage->GetMetadata();
+        LogCrit("Message[%03d] %s Pri:%s Len:%d Off:%d Type:%s Tag:%ld "
+            "MsgType:%s SubType:%s mlecmd: %d timestamp: %ld",
+            index,
+            meta.mDirectTx ? "DirectTx" : "IndirectTx",
+            Message::PriorityToString(curMessage->GetPriority()),
+            curMessage->GetLength(),
+            curMessage->GetOffset(),
+            curMessage->IsLinkSecurityEnabled() ? "Secured" : "Unsecured",
+            curMessage->GetDatagramTag(),
+            TypeToString[curMessage->GetType()],
+            SubTypeToString[curMessage->GetSubType()],
+            meta.mSubType == Message::kSubTypeMle ? meta.mMleCommand : 0xff,
+            meta.mTimestamp.GetValue());
+            uint8_t buf[32];
+            int bytes = curMessage->ReadBytes(0, buf, sizeof(buf));
+
+            for (int i = 0; i < 32 && i < bytes; i += 8)
+            {
+                LogCrit("    [%02d~%02d]: %02X %02X %02X %02X %02X %02X %02X %02X",
+                        i, i+7,
+                        buf[i], buf[i + 1], buf[i + 2], buf[i + 3],
+                        buf[i + 4], buf[i + 5], buf[i + 6], buf[i + 7]);
+            }
+        nextMessage = curMessage->GetNext();
+        index++;
+    }
+}
+
 Message *MeshForwarder::PrepareNextDirectTransmission(void)
 {
     Message *curMessage, *nextMessage;

@@ -134,4 +134,9 @@ void otHistoryTrackerEntryAgeToString(uint32_t aEntryAge, char *aBuffer, uint16_
     Utils::HistoryTracker::EntryAgeToString(aEntryAge, aBuffer, aSize);
 }
 
+void otDumpMeshForwardTxQueue(otInstance *aInstance)
+{
+    AsCoreType(aInstance).Get<MeshForwarder>().DumpMeshForwardTxQueue();
+}
+
 #endif // OPENTHREAD_CONFIG_HISTORY_TRACKER_ENABLE
