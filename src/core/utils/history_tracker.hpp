@@ -73,6 +73,7 @@ namespace Utils {
  */
 class HistoryTracker : public InstanceLocator, private NonCopyable
 {
+    friend class ot::IndirectSender;
     friend class ot::MeshForwarder;
     friend class ot::Notifier;
     friend class ot::Mle::Mle;

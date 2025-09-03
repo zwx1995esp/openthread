@@ -47,7 +47,9 @@
 #include "thread/src_match_controller.hpp"
 
 namespace ot {
-
+namespace Utils {
+class HistoryTracker;
+}
 /**
  * @addtogroup core-mesh-forwarding
  *

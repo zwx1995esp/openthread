@@ -523,7 +523,10 @@ void IndirectSender::HandleSentFrameToChild(const Mac::TxFrame &aFrame,
             message->GetIndirectTxChildMask().Remove(childIndex);
             mSourceMatchController.DecrementMessageCount(aChild);
         }
-
+#if OPENTHREAD_CONFIG_HISTORY_TRACKER_ENABLE
+        message->SetTxSuccess(aError == kErrorNone);
+        Get<Utils::HistoryTracker>().RecordTxMessage(*message, macDest);
+#endif
         Get<MeshForwarder>().RemoveMessageIfNoPendingTx(*message);
     }
 
