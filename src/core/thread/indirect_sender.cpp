@@ -524,8 +524,11 @@ void IndirectSender::HandleSentFrameToChild(const Mac::TxFrame &aFrame,
             mSourceMatchController.DecrementMessageCount(aChild);
         }
 #if OPENTHREAD_CONFIG_HISTORY_TRACKER_ENABLE
-        message->SetTxSuccess(aError == kErrorNone);
-        Get<Utils::HistoryTracker>().RecordTxMessage(*message, macDest);
+        if (aFrame.IsEmpty())
+        {
+            aChild.GetMacAddress(macDest);
+        }
+        Get<Utils::HistoryTracker>().RecordTxMessage(*message, macDest, txError == kErrorNone);
 #endif
         Get<MeshForwarder>().RemoveMessageIfNoPendingTx(*message);
     }
