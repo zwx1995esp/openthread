@@ -38,7 +38,6 @@
 #include <stdlib.h>
 
 #include <openthread/link.h>
-#include <openthread/logging.h>
 #include <openthread/platform/diag.h>
 #include <openthread/platform/time.h>
 

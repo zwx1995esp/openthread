@@ -35,10 +35,10 @@
 #include <stdlib.h>
 
 #include <openthread/error.h>
-#include <openthread/logging.h>
 #include <openthread/platform/radio.h>
 
 #include "common/code_utils.hpp"
+#include "lib/platform/logger_platform.h"
 #include "lib/spinel/spinel.h"
 #include "lib/utils/math.hpp"
 
@@ -68,7 +68,7 @@ void Logger::LogCrit(const char *aFormat, ...)
     va_list args;
 
     va_start(args, aFormat);
-    otLogPlatArgs(OT_LOG_LEVEL_CRIT, mModuleName, aFormat, args);
+    PlatformLog(PLATFORM_LOG_LEVEL_CRIT, mModuleName, aFormat, args);
     va_end(args);
 }
 
@@ -77,7 +77,7 @@ void Logger::LogWarn(const char *aFormat, ...)
     va_list args;
 
     va_start(args, aFormat);
-    otLogPlatArgs(OT_LOG_LEVEL_WARN, mModuleName, aFormat, args);
+    PlatformLog(PLATFORM_LOG_LEVEL_WARN, mModuleName, aFormat, args);
     va_end(args);
 }
 
@@ -86,7 +86,7 @@ void Logger::LogNote(const char *aFormat, ...)
     va_list args;
 
     va_start(args, aFormat);
-    otLogPlatArgs(OT_LOG_LEVEL_NOTE, mModuleName, aFormat, args);
+    PlatformLog(PLATFORM_LOG_LEVEL_NOTE, mModuleName, aFormat, args);
     va_end(args);
 }
 
@@ -95,7 +95,7 @@ void Logger::LogInfo(const char *aFormat, ...)
     va_list args;
 
     va_start(args, aFormat);
-    otLogPlatArgs(OT_LOG_LEVEL_INFO, mModuleName, aFormat, args);
+    PlatformLog(PLATFORM_LOG_LEVEL_INFO, mModuleName, aFormat, args);
     va_end(args);
 }
 
@@ -104,7 +104,7 @@ void Logger::LogDebg(const char *aFormat, ...)
     va_list args;
 
     va_start(args, aFormat);
-    otLogPlatArgs(OT_LOG_LEVEL_DEBG, mModuleName, aFormat, args);
+    PlatformLog(PLATFORM_LOG_LEVEL_DEBG, mModuleName, aFormat, args);
     va_end(args);
 }
 
@@ -134,7 +134,7 @@ void Logger::LogSpinelFrame(const uint8_t *aFrame, uint16_t aLength, bool aTx)
     char             *start  = buf;
     char             *end    = buf + sizeof(buf);
 
-    VerifyOrExit(otLoggingGetLevel() >= OT_LOG_LEVEL_DEBG);
+    VerifyOrExit(PlatformGetLogLevel() >= PLATFORM_LOG_LEVEL_DEBG);
 
     prefix   = aTx ? "Sent spinel frame" : "Received spinel frame";
     unpacked = spinel_datatype_unpack(aFrame, aLength, "CiiD", &header, &cmd, &key, &data, &len);

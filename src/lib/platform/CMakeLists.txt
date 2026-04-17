@@ -29,6 +29,8 @@
 add_library(openthread-platform
     exit_code.c
     exit_code.h
+    logger_platform.cpp
+    logger_platform.h
 )
 
 target_include_directories(openthread-platform

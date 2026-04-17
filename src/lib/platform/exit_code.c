@@ -37,7 +37,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-const char *otExitCodeToString(uint8_t aExitCode)
+const char *ExitCodeToString(uint8_t aExitCode)
 {
     const char *retval = NULL;
 

@@ -264,7 +264,7 @@ void PlatformSettingsGetSensitiveKeys(otInstance *aInstance, const uint16_t **aK
 
 void otLogCritPlat(const char *aFormat, ...) { OT_UNUSED_VARIABLE(aFormat); }
 
-const char *otExitCodeToString(uint8_t aExitCode)
+const char *ExitCodeToString(uint8_t aExitCode)
 {
     OT_UNUSED_VARIABLE(aExitCode);
     return "";
