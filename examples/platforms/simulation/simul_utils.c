@@ -33,6 +33,8 @@
 #include <net/if.h>
 #include <sys/time.h>
 
+#include <openthread/logging.h>
+
 #include "lib/platform/exit_code.h"
 #include "utils/code_utils.h"
 

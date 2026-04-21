@@ -203,6 +203,7 @@ target_include_directories(openthread-posix PRIVATE
 add_executable(ot-posix-test-settings
     settings.cpp
     settings_file.cpp
+    ${PROJECT_SOURCE_DIR}/src/lib/platform/logger_platform.cpp
 )
 target_compile_definitions(ot-posix-test-settings
     PRIVATE -DSELF_TEST=1 -DOPENTHREAD_CONFIG_LOG_PLATFORM=0

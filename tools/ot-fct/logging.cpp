@@ -29,13 +29,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <openthread/logging.h>
+#include "lib/platform/logger_platform.h"
 
-void otLogCritPlat(const char *aFormat, ...)
+void PlatformLog(PlatformLogLevel aLevel, const char *aModule, const char *aFormat, va_list aArgs)
 {
-    va_list args;
-
-    va_start(args, aFormat);
-    vprintf(aFormat, args);
-    va_end(args);
+    (void)aLevel;
+    (void)aModule;
+    vprintf(aFormat, aArgs);
+    printf("\n");
 }
+
+PlatformLogLevel PlatformGetLogLevel(void) { return PLATFORM_LOG_LEVEL_DEBG; }

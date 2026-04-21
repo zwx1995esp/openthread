@@ -45,7 +45,21 @@
 
 OT_TOOL_WEAK void PlatformLog(PlatformLogLevel aLogLevel, const char *aModuleName, const char *aFormat, va_list aArgs)
 {
+#if OPENTHREAD_CONFIG_LOG_PLATFORM
     otLogPlatArgs(static_cast<otLogLevel>(aLogLevel), aModuleName, aFormat, aArgs);
+#else
+    (void)aLogLevel;
+    (void)aModuleName;
+    (void)aFormat;
+    (void)aArgs;
+#endif
 }
 
-OT_TOOL_WEAK PlatformLogLevel PlatformGetLogLevel(void) { return static_cast<PlatformLogLevel>(otLoggingGetLevel()); }
+OT_TOOL_WEAK PlatformLogLevel PlatformGetLogLevel(void)
+{
+#if OPENTHREAD_CONFIG_LOG_PLATFORM
+    return static_cast<PlatformLogLevel>(otLoggingGetLevel());
+#else
+    return PLATFORM_LOG_LEVEL_NONE;
+#endif
+}
